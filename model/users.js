@@ -10,7 +10,8 @@ const USER = tcomb.struct({
     password : tcomb.String
 }, {strict: true})
 
-const sel = bcrypt.genSaltSync(10)
+const sel = bcrypt.genSaltSync(100)
+console.log(sel)
 const users = [
     {
         id: '45745c60-7b1a-11e8-9c9c-2d42b21b1a3e',
@@ -51,10 +52,18 @@ const getAll = () => {
 }
 
 const add = (user) => {
+    // const newUser = {
+    //     ...user,
+    //     id: uuidv1()
+    // }
     const newUser = {
-        ...user,
-        id: uuidv1()
+        id: uuidv1(),
+        name : user.name,
+        login : user.login,
+        age : user.age,
+        password : bcrypt.hashSync(user.password, sel)
     }
+
     if (validateUser(newUser)) {
         users.push(newUser)
     } else {
