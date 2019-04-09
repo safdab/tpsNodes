@@ -56,7 +56,7 @@ describe('Users tests', () => {
   it('should list an UNKNOW user on /v1/users/<id> GET', done => {
     chai
       .request(app)
-      .get('/v1/users/45745c60-unknow-2d42b21b1a3e')
+      .get('/v1/users/45745c60-unknown-2d42b21b1a3e')
       .end((err, res) => {
         res
           .should
@@ -71,7 +71,7 @@ describe('Users tests', () => {
     chai
       .request(app)
       .post('/v1/users')
-      .send({name: 'Robert', login: 'roro', age: 23})
+      .send({name: 'Robert', login: 'roro', age: 23, password : 'patapata'})
       .end((err, res) => {
         res
           .should
